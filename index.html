@@ -779,10 +779,10 @@ const Services = () => (
         <p className="lead" style={{maxWidth:360, marginTop:0}}>Vše pod jednou střechou — projekt, dodávka, instalace i servis. Bez předávání mezi subdodavateli.</p>
       </div>
       <div className="services-grid">
-        <ServiceCard icon="sun" title="Fotovoltaika" desc="Návrh, instalace a servis FVE pro rodinné domy i komerční objekty. Včetně bateriových úložišť, nabíjecích stanic pro elektromonily a vyřízení dotací."/>
-        <ServiceCard icon="thermo" title="Tepelná čerpadla" desc="Vzduch-voda systémy. Výhodná kombinace s fotovoltaikou pro maximální soběstačnost."/>
-        <ServiceCard icon="cpu" title="Chytrá řešení" desc="Cubee a další chytré systémy pro monitoring a optimalizaci spotřeby energie."/>
-        <ServiceCard icon="shield" title="Energetické poradenství" desc="Nezávislá konzultace, PENB, dotace. Vždy v zájmu zákazníka — ne dodavatele."/>
+        <ServiceCard icon="sun" title="Fotovoltaika" desc="Návrh, instalace a servis FVE pro rodinné domy i komerční objekty. Včetně bateriových úložišť, nabíjecích stanic pro elektromobily a vyřízení dotací." onClick={() => window.location.href='fotovoltaika.html'}/>
+        <ServiceCard icon="thermo" title="Tepelná čerpadla" desc="Vzduch-voda systémy. Výhodná kombinace s fotovoltaikou pro maximální soběstačnost." onClick={() => window.location.href='tepelna-cerpadla.html'}/>
+        <ServiceCard icon="cpu" title="Chytrá řešení" desc="Cubee a další chytré systémy pro monitoring a optimalizaci spotřeby energie." onClick={() => window.location.href='energeticka-reseni.html'}/>
+        <ServiceCard icon="shield" title="Energetické poradenství" desc="Nezávislá konzultace, PENB, dotace. Vždy v zájmu zákazníka — ne dodavatele." onClick={() => window.location.href='poradenstvi.html'}/>
       </div>
     </div>
   </section>
@@ -821,8 +821,8 @@ const WhyUs = () => (
 const Process = ({ noHeader }) => {
   const steps = [
     { t: 'Konzultace zdarma', d: 'Zavoláte nebo napíšete. Probereme vaši situaci — bez závazků.' },
-    { t: 'Návrh řešení na míru', d: 'Technický projekt, výpočet úspor, doporučení komponentů.' },
-    { t: 'Zajištění dotací a povolení', d: 'Veškeré papírování za vás. NZÚ, OPPIK a další programy.' },
+    { t: 'Návrh řešení na míru', d: 'Obhlídka na místě, návrh technického řešení, závazná cenová nabídka.' },
+    { t: 'Zajištění dotací a povolení', d: 'Veškeré papírování za vás. Žádost u distribuce, dotace NZÚ a další programy.' },
     { t: 'Profesionální instalace', d: 'Prověřený tým, kvalitní komponenty, hotovo v termínu.' },
     { t: 'Předání a zaškolení', d: 'Víte přesně, jak vše funguje a co sledovat v monitoringu.' },
     { t: 'Servis a podpora', d: 'Jsme tu i po instalaci. Záruční i pozáruční péče.' },
@@ -915,10 +915,10 @@ const Footer = ({ onNav }) => (
       <div className="footer-col">
         <h5>Služby</h5>
         <ul>
-          <li><a>Fotovoltaika</a></li>
-          <li><a>Tepelná čerpadla</a></li>
-          <li><a>Chytrá řešení</a></li>
-          <li><a>Poradenství</a></li>
+          <li><a href="fotovoltaika.html">Fotovoltaika</a></li>
+          <li><a href="tepelna-cerpadla.html">Tepelná čerpadla</a></li>
+          <li><a href="energeticka-reseni.html">Chytrá řešení</a></li>
+          <li><a href="poradenstvi.html">Poradenství</a></li>
         </ul>
       </div>
       <div className="footer-col">
@@ -1075,6 +1075,14 @@ function App() {
   const [page, setPage] = useState(() => localStorage.getItem('bp-page') || 'home');
   const onNav = (id) => { setPage(id); localStorage.setItem('bp-page', id); window.scrollTo({top:0, behavior:'instant'}); };
   const titles = { home: 'Úvod', services: 'Služby', jak: 'Jak to funguje', reference: 'Reference', 'o-nas': 'O nás', kontakt: 'Kontakt' };
+
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && Object.keys(titles).includes(hash)) {
+      setPage(hash);
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }, []);
 
   return (<>
     <Nav page={page} onNav={onNav}/>
