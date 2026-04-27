@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Energetické poradenství – odborný pohled, který se vyplatí | Button People</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -31,6 +32,9 @@
   --dur-fast:       120ms;
   --ease-out:       cubic-bezier(.22,.61,.36,1);
   --container:      1200px;
+  --shadow-md:      0 6px 16px -4px rgba(0,7,8,0.10), 0 2px 4px rgba(0,7,8,0.06);
+  --font-mono:      'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --dur-base:       220ms;
 }
 
 html { -webkit-text-size-adjust: 100%; }
@@ -89,6 +93,17 @@ p { margin: 0; text-wrap: pretty; }
 .footer-logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.02em; font-size: 14px; padding: 6px 12px 6px 8px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #fff; }
 .footer-logo .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--bp-green); display: inline-block; }
 
+.products-section { padding-bottom: 64px; }
+.shop-section-title { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border-1); display: flex; align-items: center; gap: 10px; }
+.shop-section-title::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--bp-green); display: inline-block; flex: none; }
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.product-card { background: #fff; border: 1px solid var(--border-1); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: all var(--dur-base) var(--ease-out); }
+.product-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--bp-stone-200); }
+.product-name { font-size: 15px; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; }
+.product-price { font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--fg-1); margin-top: auto; padding-top: 4px; }
+.product-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: var(--bp-green); color: #000; font-weight: 700; font-size: 14px; cursor: pointer; border: none; font-family: var(--font-sans); transition: background var(--dur-fast); width: 100%; }
+.product-btn:hover { background: var(--bp-green-600); color: #fff; }
+
 .sticky-cta { display: none; position: fixed; bottom: 16px; right: 16px; z-index: 60; background: var(--bp-green); color: #000; padding: 14px 22px; border-radius: 999px; font-weight: 700; font-size: 14px; font-family: var(--font-sans); box-shadow: var(--shadow-lg); }
 
 @media (max-width: 900px) {
@@ -98,6 +113,7 @@ p { margin: 0; text-wrap: pretty; }
   .nav-links { display: none; }
   .nav-phone { display: none; }
   .sticky-cta { display: inline-flex; }
+  .product-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -108,16 +124,25 @@ p { margin: 0; text-wrap: pretty; }
     <a href="index.html" class="nav-logo"><span class="dot"></span>BUTTON PEOPLE</a>
     <div class="nav-links">
       <a href="index.html">Úvod</a>
-      <a href="index.html#services">Služby</a>
-      <a href="index.html#jak">Jak to funguje</a>
-      <a href="index.html#reference">Reference</a>
-      <a href="index.html#o-nas">O nás</a>
+      <div class="nav-dropdown">
+          <a href="sluzby.html" class="nav-dropdown-trigger">Služby <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="fotovoltaika.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span>Fotovoltaika</a>
+            <a href="tepelna-cerpadla.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg></span>Tepelná čerpadla</a>
+            <a href="energeticka-reseni.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></span>Chytrá řešení</a>
+            <a href="poradenstvi.html"><span class="dd-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>Energetické poradenství</a>
+          </div>
+        </div>
+      <a href="jak-to-funguje.html">Jak to funguje</a>
+      <a href="reference.html">Reference</a>
+      <a href="o-nas.html">O nás</a>
+      <a href="eshop.html">Produkty / E-shop</a>
     </div>
     <span class="nav-phone">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       +420 721 807 498
     </span>
-    <a href="index.html#kontakt" class="nav-cta">Konzultace zdarma</a>
+    <a href="kontakt.html" class="nav-cta">Konzultace zdarma</a>
   </nav>
 </div>
 
@@ -164,6 +189,67 @@ p { margin: 0; text-wrap: pretty; }
   </div>
 </div>
 
+<div class="container products-section">
+  <div class="shop-section-title">Ceník poradenských služeb</div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-name">Průkaz energetické náročnosti budovy (PENB) – rezidenční budova</div>
+      <div class="product-price">25 000 Kč</div>
+      <button class="product-btn" onclick="localStorage.setItem('bp-interest','Mám zájem o: Průkaz energetické náročnosti budovy (PENB)'); window.location.href='kontakt.html'">
+        Mám zájem
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-name">Renovační pas pro rezidenční budovu</div>
+      <div class="product-price">15 000 Kč</div>
+      <button class="product-btn" onclick="localStorage.setItem('bp-interest','Mám zájem o: Renovační pas pro rezidenční budovu'); window.location.href='kontakt.html'">
+        Mám zájem
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-name">Návrh FVE systému + studie proveditelnosti do 15 kW</div>
+      <div class="product-price">10 000 Kč</div>
+      <button class="product-btn" onclick="localStorage.setItem('bp-interest','Mám zájem o: Návrh FVE systému + studie proveditelnosti do 15 kW'); window.location.href='kontakt.html'">
+        Mám zájem
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-name">Návrh FVE systému + studie proveditelnosti 15–100 kW</div>
+      <div class="product-price">15 000 Kč</div>
+      <button class="product-btn" onclick="localStorage.setItem('bp-interest','Mám zájem o: Návrh FVE systému + studie proveditelnosti 15–100 kW'); window.location.href='kontakt.html'">
+        Mám zájem
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-name">Vytvoření skupiny sdílení v EDC</div>
+      <div class="product-price">2 000 Kč</div>
+      <button class="product-btn" onclick="localStorage.setItem('bp-interest','Mám zájem o: Vytvoření skupiny sdílení v EDC'); window.location.href='kontakt.html'">
+        Mám zájem
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-name">Nezávislá kontrola vyúčtování plateb za energie – návrh vhodnějšího nastavení</div>
+      <div class="product-price">2 000 Kč</div>
+      <button class="product-btn" onclick="localStorage.setItem('bp-interest','Mám zájem o: Nezávislá kontrola vyúčtování plateb za energie'); window.location.href='kontakt.html'">
+        Mám zájem
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+  </div>
+</div>
+
 <div class="cta-wrap">
   <div class="container">
     <div class="cta-close">
@@ -172,7 +258,7 @@ p { margin: 0; text-wrap: pretty; }
         <p>Bez prodejního tlaku. Jen odpovědi na to, co potřebujete vědět. Odpovím do 24 hodin.</p>
       </div>
       <div class="cta-actions">
-        <a href="index.html#kontakt" class="btn btn-dark btn-lg">
+        <a href="kontakt.html" class="btn btn-dark btn-lg">
           Nezávazně se poradit
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
@@ -203,10 +289,11 @@ p { margin: 0; text-wrap: pretty; }
     <div class="footer-col">
       <h5>Web</h5>
       <ul>
-        <li><a href="index.html#jak">Jak to funguje</a></li>
-        <li><a href="index.html#reference">Reference</a></li>
-        <li><a href="index.html#o-nas">O nás</a></li>
-        <li><a href="index.html#kontakt">Kontakt</a></li>
+        <li><a href="jak-to-funguje.html">Jak to funguje</a></li>
+        <li><a href="reference.html">Reference</a></li>
+        <li><a href="o-nas.html">O nás</a></li>
+        <li><a href="eshop.html">Produkty / E-shop</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -228,7 +315,7 @@ p { margin: 0; text-wrap: pretty; }
   </div>
 </footer>
 
-<a href="index.html#kontakt" class="sticky-cta">Konzultace zdarma</a>
+<a href="kontakt.html" class="sticky-cta">Konzultace zdarma</a>
 
 </body>
 </html>
