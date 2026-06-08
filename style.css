@@ -162,12 +162,10 @@ h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
   box-shadow: 0 4px 20px -8px rgba(0,7,8,0.08);
 }
 .nav-logo {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-weight: 800; letter-spacing: 0.02em; font-size: 14px;
-  padding: 6px 12px 6px 8px; border-radius: 999px;
-  background: var(--bp-black); color: #fff;
-  flex-shrink: 0;
+  display: inline-flex; align-items: center;
+  padding: 0; flex-shrink: 0;
 }
+.nav-logo img { height: 30px; width: auto; display: block; }
 .nav-logo .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--bp-green); display: inline-block; flex: none; }
 .nav-links { display: flex; gap: 2px; margin-left: 14px; flex: 1; }
 .nav-links a {
@@ -497,7 +495,7 @@ h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 24px; font-size: 12px; color: rgba(255,255,255,0.40);
 }
-.footer .nav-logo { background: rgba(255,255,255,0.08); }
+.footer .nav-logo img { height: 32px; }
 
 /* ========== CONTACT ========== */
 .contact-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start; }
